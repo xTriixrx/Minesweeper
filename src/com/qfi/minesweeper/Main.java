@@ -1,4 +1,4 @@
-package com.qfi;
+package com.qfi.minesweeper;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
