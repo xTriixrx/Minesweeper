@@ -4,17 +4,18 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 
-public class Main {
-
-	public static void main(String[] args){
-
+public class Main
+{
+	public static void main(String[] args)
+	{
+		int maxSize = 9;
 		int row = 0, col = 0;
 		boolean rowCheck = true, colCheck = true, Gameplay = true, firsttime = true;
 		long StartTime = 0, EndTime = 0;
 
 		Scanner scan = new Scanner(System.in);
 
-		Board b = new Board();
+		Board b = new Board(maxSize);
 		
 		b.PrintGame();
 
@@ -31,7 +32,7 @@ public class Main {
 			try{
 				row = scan.nextInt();
 				row = row - 1;
-				if(row <= -1 || row > 7){
+				if(row <= -1 || row > (maxSize - 1)){
 					rowCheck = true;
 					System.out.print("This value is not in the range of the game try again");
 					System.out.println();
@@ -49,7 +50,7 @@ public class Main {
 			try{
 				col = scan.nextInt();
 				col = col - 1;
-				if(col <= -1 || col > 7){
+				if(col <= -1 || col > (maxSize - 1)){
 					colCheck = true;
 					System.out.print("This value is not in the range of the game try again");
 					System.out.println();

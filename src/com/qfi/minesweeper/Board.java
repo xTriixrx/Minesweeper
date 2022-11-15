@@ -1,18 +1,26 @@
 package com.qfi.minesweeper;
 
-public class Board {
+public class Board
+{
+	int m_size = 0;
+	int[][] board = null;// = new int[8][8];//main array
+	int[][] selects = null;// = new int[8][8];//array of chosen positions
 
-	int[][] board = new int[8][8];//main array
-	int[][] selects = new int[8][8];//array of chosen positions
+	public Board (int size)
+	{
+		m_size = size;
+		board = new int[m_size][m_size];
+		selects = new int[m_size][m_size];
+	}
 
-/*
- * This method was made to check bomb counts on cells and used to test game
- */
+	/*
+	 * This method was made to check bomb counts on cells and used to test game
+	 */
 	public void PrintBoard(){
 
 		System.out.print("  ");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print("|" + (i+1) );
 
 		}
@@ -20,9 +28,9 @@ public class Board {
 		System.out.println();
 		System.out.println("-------------------");
 
-		for(int i = 0; i < 8; i++){
-			System.out.print((i+1 + " "));
-			for(int j = 0; j < 8; j++){
+		for(int i = 0; i < m_size; i++){
+			System.out.print((i+m_size + " "));
+			for(int j = 0; j < m_size; j++){
 				if(board[i][j] == 0){
 					System.out.print("|-");
 				}
@@ -38,9 +46,9 @@ public class Board {
 		System.out.println();
 	}
 
-/*
- * Places ten "bombs" in both arrays randomly sets values for bombs in each array
- */
+	/*
+	 * Places ten "bombs" in both arrays randomly sets values for bombs in each array
+	 */
 	public void PlaceBombs(int[][] arr){
 		int bomb = 9;
 		int hold, count = 0;
@@ -144,14 +152,14 @@ public class Board {
 		}
 
 	}
+
 	/*
 	 * Prints "empty" array board for user
 	 */
-
 	public void PrintGame(){
 		System.out.print("  ");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print("|" + (i+1) );
 
 		}
@@ -159,9 +167,9 @@ public class Board {
 		System.out.println();
 		System.out.println("-------------------");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print((i+1 + " "));
-			for(int j = 0; j < 8; j++){
+			for(int j = 0; j < m_size; j++){
 				if(board[i][j] == 0 || board[i][j] != 0)
 					System.out.print("|-");
 			}
@@ -189,12 +197,12 @@ public class Board {
 	/*
 	 * Updates board to user , outlines all possibilities that could be 
 	 * shown throughout game
-	 * 	 */
+	 */
 	public void UpdateBoard(int row, int col, int[][] arr){
 
 		System.out.print("  ");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print("|" + (i+1) );
 
 		}
@@ -202,9 +210,9 @@ public class Board {
 		System.out.println();
 		System.out.println("-------------------");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print((i+1 + " "));
-			for(int j = 0; j < 8; j++){
+			for(int j = 0; j < m_size; j++){
 				if(selects[i][j] == 10){
 					System.out.print("| ");
 				}
@@ -395,8 +403,8 @@ public class Board {
 	 * If is true when only bombs are left, outputs boolean in main class
 	 */
 	public boolean WinGame(int row, int col, int[][] arr){
-		for(int i = 0; i < 8; i++){
-			for(int j = 0; j < 8; j++){
+		for(int i = 0; i < m_size; i++){
+			for(int j = 0; j < m_size; j++){
 				if(selects[i][j] == 0){
 					return false;
 				}
@@ -411,7 +419,7 @@ public class Board {
 	public void EndGameBoard(){
 		System.out.print("  ");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print("|" + (i+1) );
 
 		}
@@ -419,9 +427,9 @@ public class Board {
 		System.out.println();
 		System.out.println("-------------------");
 
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < m_size; i++){
 			System.out.print((i+1 + " "));
-			for(int j = 0; j < 8; j++){
+			for(int j = 0; j < m_size; j++){
 				if(board[i][j] == 9){
 					System.out.print("|Q");
 				}
