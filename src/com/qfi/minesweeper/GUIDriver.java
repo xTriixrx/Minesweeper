@@ -1,16 +1,25 @@
 package com.qfi.minesweeper;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 import javafx.application.Application;
 
+/**
+ *
+ * @author Vincent.Nigro
+ * @version 1.0.0
+ */
 public class GUIDriver extends Application
 {
     private Controller m_controller = null;
+
+    private static final int EXPERT = 2; // 16x30 w/ 99 mines
+    private static final int BEGINNER = 0; // 16x16 w/ 40 mines
+    private static final int INTERMEDIATE = 1; // 9x9 w/ 10 mines
     private static final String MINESWEEPER_TITLE = "Minesweeper";
     private static final Logger m_logger = LogManager.getLogger(GUIDriver.class);
     private static final String MINESWEEPER_LAYOUT_PATH = "layout/Minesweeper.fxml";

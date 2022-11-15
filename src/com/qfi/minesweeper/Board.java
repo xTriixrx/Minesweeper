@@ -3,14 +3,14 @@ package com.qfi.minesweeper;
 public class Board
 {
 	int m_size = 0;
-	int[][] board = null;// = new int[8][8];//main array
-	int[][] selects = null;// = new int[8][8];//array of chosen positions
+	private int[][] m_board = null;// = new int[8][8];//main array
+	private int[][] m_selects = null;// = new int[8][8];//array of chosen positions
 
 	public Board (int size)
 	{
 		m_size = size;
-		board = new int[m_size][m_size];
-		selects = new int[m_size][m_size];
+		m_board = new int[m_size][m_size];
+		m_selects = new int[m_size][m_size];
 	}
 
 	/*
@@ -31,11 +31,11 @@ public class Board
 		for(int i = 0; i < m_size; i++){
 			System.out.print((i+m_size + " "));
 			for(int j = 0; j < m_size; j++){
-				if(board[i][j] == 0){
+				if(m_board[i][j] == 0){
 					System.out.print("|-");
 				}
 				else{
-					System.out.print("|" + board[i][j]);
+					System.out.print("|" + m_board[i][j]);
 				}
 			}
 			System.out.print("|");
@@ -49,17 +49,17 @@ public class Board
 	/*
 	 * Places ten "bombs" in both arrays randomly sets values for bombs in each array
 	 */
-	public void PlaceBombs(int[][] arr){
+	public void PlaceBombs(){
 		int bomb = 9;
 		int hold, count = 0;
 
 		while(count < 10){
-			for(int i = 0; i < arr.length; i++){
-				for(int j = 0; j < arr[0].length; j++){
+			for(int i = 0; i < m_board.length; i++){
+				for(int j = 0; j < m_board[0].length; j++){
 					hold = (int)(Math.random() * 25) + 1;
 					if(hold == bomb && count < 10){
-						arr[i][j] = 9;
-						selects[i][j] = 11;
+						m_board[i][j] = 9;
+						m_selects[i][j] = 11;
 						count++;
 					}
 
@@ -72,18 +72,18 @@ public class Board
 	/*
 	 * Counts bombs surrounding ith position throughout array 
 	 */
-	public void BombCount(int[][] arr){
+	public void BombCount(){
 		int count = 0;
 
-		for(int i = 0; i < arr.length; i++){
+		for(int i = 0; i < m_board.length; i++){
 			count = 0;
-			for(int j = 0; j < arr[0].length; j++){
+			for(int j = 0; j < m_board[0].length; j++){
 				count = 0;
 
-				if(arr[i][j] == 9){
+				if(m_board[i][j] == 9){
 					try{
-						if(arr[i][j] == 9)
-							arr[i][j] = 9;
+						if(m_board[i][j] == 9)
+							m_board[i][j] = 9;
 					}catch(Exception e){
 
 					}
@@ -91,62 +91,62 @@ public class Board
 
 				else{
 					try{
-						if(arr[i+1][j] == 9)
+						if(m_board[i+1][j] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{
-						if(arr[i-1][j] == 9)
+						if(m_board[i-1][j] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{		
-						if(arr[i][j+1] == 9)
+						if(m_board[i][j+1] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{
-						if(arr[i][j-1] == 9)
+						if(m_board[i][j-1] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{
-						if(arr[i-1][j-1] == 9)
+						if(m_board[i-1][j-1] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{
-						if(arr[i-1][j+1] == 9)
+						if(m_board[i-1][j+1] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{
-						if(arr[i+1][j+1] == 9)
+						if(m_board[i+1][j+1] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
 					try{
-						if(arr[i+1][j-1] == 9)
+						if(m_board[i+1][j-1] == 9)
 							count++;
 					}catch(Exception e){
 
 					}
 
-					arr[i][j] = count;
+					m_board[i][j] = count;
 				}
 			}
 		}
@@ -170,7 +170,7 @@ public class Board
 		for(int i = 0; i < m_size; i++){
 			System.out.print((i+1 + " "));
 			for(int j = 0; j < m_size; j++){
-				if(board[i][j] == 0 || board[i][j] != 0)
+				if(m_board[i][j] == 0 || m_board[i][j] != 0)
 					System.out.print("|-");
 			}
 			System.out.print("|");
@@ -184,12 +184,12 @@ public class Board
 	/*
 	 * Determines what to do when player chooses a specific position
 	 */
-	public void UpdateOnMove(int row, int col, int[][] arr){
-		if(arr[row][col] != 9 && arr[row][col] != 0){
-			UpdateBoard(row, col, arr);
+	public void UpdateOnMove(int row, int col){
+		if(m_board[row][col] != 9 && m_board[row][col] != 0){
+			UpdateBoard(row, col);
 		}
 		else{
-			Spread(row, col, arr);
+			Spread(row, col, m_board);
 		}
 
 	}
@@ -198,7 +198,7 @@ public class Board
 	 * Updates board to user , outlines all possibilities that could be 
 	 * shown throughout game
 	 */
-	public void UpdateBoard(int row, int col, int[][] arr){
+	public void UpdateBoard(int row, int col){
 
 		System.out.print("  ");
 
@@ -213,25 +213,25 @@ public class Board
 		for(int i = 0; i < m_size; i++){
 			System.out.print((i+1 + " "));
 			for(int j = 0; j < m_size; j++){
-				if(selects[i][j] == 10){
+				if(m_selects[i][j] == 10){
 					System.out.print("| ");
 				}
-				else if(selects[i][j] == 11){
+				else if(m_selects[i][j] == 11){
 					System.out.print("|-");
 				}
-				else if(selects[i][j] != 0){
-					System.out.print("|" + selects[i][j]);
+				else if(m_selects[i][j] != 0){
+					System.out.print("|" + m_selects[i][j]);
 				}
-				else if(arr[row][col] == 0 && i == row && j == col){
+				else if(m_board[row][col] == 0 && i == row && j == col){
 					System.out.print("| ");
 				}
-				else if(arr[i][j] != arr[row][col]){
+				else if(m_board[i][j] != m_board[row][col]){
 					System.out.print("|-");
 				}
-				else if(arr[i][j] == arr[row][col]){
+				else if(m_board[i][j] == m_board[row][col]){
 					if(i == row && j == col){
-						System.out.print("|" + arr[row][col]);
-						selects[i][j] = arr[row][col];
+						System.out.print("|" + m_board[row][col]);
+						m_selects[i][j] = m_board[row][col];
 					}
 					else{
 						System.out.print("|-");
@@ -269,10 +269,10 @@ public class Board
 			try{
 				if(arr[row][col] != 9){
 					if(arr[row][col] != 0){
-						selects[row][col] = arr[row][col];
+						m_selects[row][col] = arr[row][col];
 					}
 					if(arr[row][col] == 0){
-						selects[row][col] = 10;
+						m_selects[row][col] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -282,10 +282,10 @@ public class Board
 			try{
 				if(arr[row + 1][col] != 9){
 					if(arr[row + 1][col] != 0){
-						selects[row + 1][col] = arr[row + 1][col];
+						m_selects[row + 1][col] = arr[row + 1][col];
 					}
 					if(arr[row + 1][col] == 0){
-						selects[row + 1][col] = 10;
+						m_selects[row + 1][col] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -295,10 +295,10 @@ public class Board
 			try{
 				if(arr[row + 1][col + 1] != 9){
 					if(arr[row + 1][col + 1] != 0){
-						selects[row + 1][col + 1] = arr[row + 1][col + 1];
+						m_selects[row + 1][col + 1] = arr[row + 1][col + 1];
 					}
 					if(arr[row + 1][col + 1] == 0){
-						selects[row + 1][col + 1] = 10;
+						m_selects[row + 1][col + 1] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -308,10 +308,10 @@ public class Board
 			try{
 				if(arr[row +1][col - 1] != 9){
 					if(arr[row +1][col - 1] != 0){
-						selects[row + 1][col - 1] = arr[row +1][col - 1];
+						m_selects[row + 1][col - 1] = arr[row +1][col - 1];
 					}
 					if(arr[row +1][col - 1] == 0){
-						selects[row + 1][col - 1] = 10;
+						m_selects[row + 1][col - 1] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -321,10 +321,10 @@ public class Board
 			try{
 				if(arr[row - 1][col] != 9){
 					if(arr[row - 1][col] != 0){
-						selects[row - 1][col] = arr[row - 1][col];
+						m_selects[row - 1][col] = arr[row - 1][col];
 					}
 					if(arr[row - 1][col] == 0){
-						selects[row - 1][col] = 10;
+						m_selects[row - 1][col] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -334,10 +334,10 @@ public class Board
 			try{
 				if(arr[row - 1][col + 1] != 9){
 					if(arr[row - 1][col + 1] != 0){
-						selects[row - 1][col + 1] = arr[row - 1][col + 1];
+						m_selects[row - 1][col + 1] = arr[row - 1][col + 1];
 					}
 					if(arr[row - 1][col + 1] == 0){
-						selects[row - 1][col + 1] = 10;
+						m_selects[row - 1][col + 1] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -347,10 +347,10 @@ public class Board
 			try{
 				if(arr[row - 1][col - 1] != 9){
 					if(arr[row - 1][col - 1] != 0){
-						selects[row - 1][col - 1] = arr[row - 1][col - 1];
+						m_selects[row - 1][col - 1] = arr[row - 1][col - 1];
 					}
 					if(arr[row - 1][col - 1] == 0){
-						selects[row - 1][col - 1] = 10;
+						m_selects[row - 1][col - 1] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -360,10 +360,10 @@ public class Board
 			try{
 				if(arr[row][col - 1] != 9){
 					if(arr[row][col - 1] != 0){
-						selects[row][col - 1] = arr[row][col - 1];
+						m_selects[row][col - 1] = arr[row][col - 1];
 					}
 					if(arr[row][col - 1] == 0){
-						selects[row][col - 1] = 10;
+						m_selects[row][col - 1] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -373,10 +373,10 @@ public class Board
 			try{
 				if(arr[row][col + 1] != 9){
 					if(arr[row][col + 1] != 0){
-						selects[row][col + 1] = arr[row][col + 1];	
+						m_selects[row][col + 1] = arr[row][col + 1];
 					}
 					if(arr[row][col + 1] == 0){
-						selects[row][col + 1] = 10;
+						m_selects[row][col + 1] = 10;
 					}
 				}
 			}catch(Exception e){
@@ -384,14 +384,14 @@ public class Board
 			}
 
 		}
-		UpdateBoard(row, col, arr);
+		UpdateBoard(row, col);
 	}
 	
 	/*
 	 * If game is lost, outputs boolean in main class  
 	 */
-	public boolean LoseGame(int row, int col, int[][] arr){
-		if(arr[row][col] == 9){
+	public boolean LoseGame(int row, int col){
+		if(m_board[row][col] == 9){
 			return true;
 		}
 		else{
@@ -402,10 +402,10 @@ public class Board
 	/*
 	 * If is true when only bombs are left, outputs boolean in main class
 	 */
-	public boolean WinGame(int row, int col, int[][] arr){
+	public boolean WinGame(int row, int col){
 		for(int i = 0; i < m_size; i++){
 			for(int j = 0; j < m_size; j++){
-				if(selects[i][j] == 0){
+				if(m_selects[i][j] == 0){
 					return false;
 				}
 			}
@@ -430,20 +430,20 @@ public class Board
 		for(int i = 0; i < m_size; i++){
 			System.out.print((i+1 + " "));
 			for(int j = 0; j < m_size; j++){
-				if(board[i][j] == 9){
+				if(m_board[i][j] == 9){
 					System.out.print("|Q");
 				}
-				else if(selects[i][j] == 0){
+				else if(m_selects[i][j] == 0){
 					System.out.print("|-");
 				}
-				else if(selects[i][j] == 10){
+				else if(m_selects[i][j] == 10){
 					System.out.print("| ");
 				}
-				else if(board[i][j] == 0){
+				else if(m_board[i][j] == 0){
 					System.out.print("|-");
 				}
 				else{
-					System.out.print("|" + board[i][j]);
+					System.out.print("|" + m_board[i][j]);
 				}
 			}
 			System.out.print("|");

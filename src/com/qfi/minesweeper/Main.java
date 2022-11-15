@@ -1,8 +1,7 @@
 package com.qfi.minesweeper;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
-
+import java.text.DecimalFormat;
 
 public class Main
 {
@@ -19,9 +18,9 @@ public class Main
 		
 		b.PrintGame();
 
-		b.PlaceBombs(b.board);
+		b.PlaceBombs();
 
-		b.BombCount(b.board);
+		b.BombCount();
 		
 		//b.PrintBoard();
 
@@ -67,12 +66,12 @@ public class Main
 		firsttime = false;
 		}
 		
-		b.UpdateOnMove(row, col, b.board);
+		b.UpdateOnMove(row, col);
 		
 		rowCheck = true;
 		colCheck = true;
 		
-		if(b.LoseGame(row, col, b.board) == true){
+		if(b.LoseGame(row, col)){
 			DecimalFormat df = new DecimalFormat("###.##");
 			EndTime = System.nanoTime();
 			Gameplay = false;
@@ -83,7 +82,7 @@ public class Main
 			System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
 			System.out.println("Sorry, you lost");
 		}
-		if(b.WinGame(row, col, b.board) == true){
+		if(b.WinGame(row, col)){
 			DecimalFormat df = new DecimalFormat("###.##");
 			EndTime = System.nanoTime();
 			Gameplay = false;
