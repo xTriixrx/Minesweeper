@@ -174,133 +174,56 @@ public class Board
 	{
 		List<String> spreads = new ArrayList<>();
 
-		if(m_board[row][col] == 0){
-			try{
-				if(m_board[row][col] != 9){
-					if(m_board[row][col] != 0){
-						m_selects[row][col] = m_board[row][col];
-					}
-					if(m_board[row][col] == 0){
-						m_selects[row][col] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
+		if (m_board[row][col] == 0 && m_selects[row][col] != 10)
+		{
+			int startRow = (row - 1 < 0) ? row : row - 1;
+			int startCol = (col - 1 < 0) ? col : col - 1;
+			int endRow = (row + 1 == m_rowSize) ? row : row + 1;
+			int endCol = (col + 1 == m_colSize) ? col : col + 1;
 
-			}
+			// Iterate through each possible row neighbor
+			for (int rowNum = startRow; rowNum <= endRow; rowNum++)
+			{
+				// Iterate through each possible column neighbor
+				for (int colNum = startCol; colNum <= endCol; colNum++)
+				{
+					// Only perform actions if current queried position is not a bomb
+					if (m_board[rowNum][colNum] != 9)
+					{
+						// If a position is found that is not a spread block, add to selects array
+						if (m_board[rowNum][colNum] != 0)
+						{
+							m_selects[rowNum][colNum] = m_board[rowNum][colNum];
+						}
 
-			try{
-				if(m_board[row + 1][col] != 9){
-					if(m_board[row + 1][col] != 0){
-						m_selects[row + 1][col] = m_board[row + 1][col];
-					}
-					if(m_board[row + 1][col] == 0){
-						m_selects[row + 1][col] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
-			}
-
-			try{
-				if(m_board[row + 1][col + 1] != 9){
-					if(m_board[row + 1][col + 1] != 0){
-						m_selects[row + 1][col + 1] = m_board[row + 1][col + 1];
-					}
-					if(m_board[row + 1][col + 1] == 0){
-						m_selects[row + 1][col + 1] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
-			}
-
-			try{
-				if(m_board[row +1][col - 1] != 9){
-					if(m_board[row +1][col - 1] != 0){
-						m_selects[row + 1][col - 1] = m_board[row +1][col - 1];
-					}
-					if(m_board[row +1][col - 1] == 0){
-						m_selects[row + 1][col - 1] = 10;
-						spreads.add(row + " " + col);
+						// If the current spread block is found, tag in select array
+						if (rowNum == row && colNum == col)
+						{
+							if (m_board[rowNum][colNum] == 0)
+							{
+								m_selects[rowNum][colNum] = 10;
+							}
+						}
+						else
+						{
+							// Add additional spread blocks into list for additional processing
+							if (m_board[rowNum][colNum] == 0)
+							{
+								spreads.add(rowNum + " " + colNum);
+							}
+						}
 					}
 				}
-			}catch(Exception e){
-
 			}
 
-			try{
-				if(m_board[row - 1][col] != 9){
-					if(m_board[row - 1][col] != 0){
-						m_selects[row - 1][col] = m_board[row - 1][col];
-					}
-					if(m_board[row - 1][col] == 0){
-						m_selects[row - 1][col] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
+			// Iterate over each spread position found & continue fanning out
+			for (String pos : spreads)
+			{
+				String[] rowCol = pos.split("\\s+");
+				int r = Integer.parseInt(rowCol[0]);
+				int c = Integer.parseInt(rowCol[1]);
+				spread(r, c);
 			}
-
-			try{
-				if(m_board[row - 1][col + 1] != 9){
-					if(m_board[row - 1][col + 1] != 0){
-						m_selects[row - 1][col + 1] = m_board[row - 1][col + 1];
-					}
-					if(m_board[row - 1][col + 1] == 0){
-						m_selects[row - 1][col + 1] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
-			}
-
-			try{
-				if(m_board[row - 1][col - 1] != 9){
-					if(m_board[row - 1][col - 1] != 0){
-						m_selects[row - 1][col - 1] = m_board[row - 1][col - 1];
-					}
-					if(m_board[row - 1][col - 1] == 0){
-						m_selects[row - 1][col - 1] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
-			}
-
-			try{
-				if(m_board[row][col - 1] != 9){
-					if(m_board[row][col - 1] != 0){
-						m_selects[row][col - 1] = m_board[row][col - 1];
-					}
-					if(m_board[row][col - 1] == 0){
-						m_selects[row][col - 1] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
-			}
-
-			try{
-				if(m_board[row][col + 1] != 9){
-					if(m_board[row][col + 1] != 0){
-						m_selects[row][col + 1] = m_board[row][col + 1];
-					}
-					if(m_board[row][col + 1] == 0){
-						m_selects[row][col + 1] = 10;
-						spreads.add(row + " " + col);
-					}
-				}
-			}catch(Exception e){
-
-			}
-
 		}
 	}
 	
@@ -377,7 +300,7 @@ public class Board
 		System.out.print(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
 		System.out.println();
 	}
-	
+
 	/*
 	 * Is called at the end of game (if game is lost) displays bombs as Qs and all selected
 	 * positions
