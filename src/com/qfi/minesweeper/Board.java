@@ -56,79 +56,36 @@ public class Board
 	{
 		int count = 0;
 
-		for(int i = 0; i < m_board.length; i++){
-			count = 0;
-			for(int j = 0; j < m_board[0].length; j++){
+		for (int row = 0; row < m_rowSize; row++)
+		{
+			for (int col = 0; col < m_colSize; col++)
+			{
 				count = 0;
 
-				if(m_board[i][j] == 9){
-					try{
-						if(m_board[i][j] == 9)
-							m_board[i][j] = 9;
-					}catch(Exception e){
+				if (m_board[row][col] == 9)
+				{
+					continue;
+				}
 
+				int startRow = (row - 1 < 0) ? row : row - 1;
+				int startCol = (col - 1 < 0) ? col : col - 1;
+				int endRow = (row + 1 == m_rowSize) ? row : row + 1;
+				int endCol = (col + 1 == m_colSize) ? col : col + 1;
+
+				// Iterate through each possible row neighbor
+				for (int rowNum = startRow; rowNum <= endRow; rowNum++)
+				{
+					// Iterate through each possible column neighbor
+					for (int colNum = startCol; colNum <= endCol; colNum++)
+					{
+						if (m_board[rowNum][colNum] == 9)
+						{
+							count++;
+						}
 					}
 				}
 
-				else{
-					try{
-						if(m_board[i+1][j] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{
-						if(m_board[i-1][j] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{		
-						if(m_board[i][j+1] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{
-						if(m_board[i][j-1] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{
-						if(m_board[i-1][j-1] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{
-						if(m_board[i-1][j+1] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{
-						if(m_board[i+1][j+1] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					try{
-						if(m_board[i+1][j-1] == 9)
-							count++;
-					}catch(Exception e){
-
-					}
-
-					m_board[i][j] = count;
-				}
+				m_board[row][col] = count;
 			}
 		}
 
