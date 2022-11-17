@@ -300,6 +300,11 @@ public class Board
 		System.out.println();
 	}
 
+	public int[][] getBoardArray()
+	{
+		return m_board;
+	}
+
 	public int[][] getSelectionArray()
 	{
 		return m_selects;

@@ -4,7 +4,12 @@ import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import org.apache.log4j.Logger;
 
@@ -18,6 +23,8 @@ import javafx.fxml.Initializable;
 import org.apache.log4j.LogManager;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+
+import javax.swing.*;
 
 /**
  *
@@ -184,8 +191,6 @@ public class Controller implements Initializable
 
             if (node.getId().equals(id))
             {
-                System.out.println("Node: " + node.getId());
-                System.out.println("ID: " + id);
                 return node;
             }
         }
@@ -277,7 +282,9 @@ public class Controller implements Initializable
 //            seconds = seconds - (minutes * 60);
 //            b.printEndBoard();
 //            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
-            System.out.println("Sorry, you lost");
+            infoBox("Sorry, you lost.", "Lost");
+            displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), position);
+//            System.out.println("Sorry, you lost");
         }
         if (m_board.wonGame())
         {
@@ -287,7 +294,8 @@ public class Controller implements Initializable
 //            double seconds = (EndTime-StartTime) / 1000000000.0;
 //            int minutes = (int) (seconds / 60);
 //            seconds = seconds - (minutes * 60);
-            System.out.println("Congratulations, you won!");
+            infoBox("Congratulations, you won!", "Won");
+            displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), position);
 //            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
         }
     };
@@ -323,6 +331,101 @@ public class Controller implements Initializable
             default:
                 m_logger.error("Unknown button count received of: " + count + ".");
         }
+    }
+
+    private void displayEndGame(int[][] boardArray, int[][] selectionsArray, String hitPosition)
+    {
+        String[] rowCol = hitPosition.split("_");
+        int row = Integer.parseInt(rowCol[0]);
+        int col = Integer.parseInt(rowCol[1]);
+
+        for (int i = 0; i < 9; i++)
+        {
+//            System.out.print((i+1 + " "));
+            for (int j = 0; j < 9; j++)
+            {
+                if (boardArray[i][j] == 0 || boardArray[i][j] == 10 || selectionsArray[i][j] == 10)
+                {
+//                    System.out.print("| ");
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        ((Button) button).setBackground(m_blankBackground);
+                    }
+                }
+                else if (boardArray[i][j] == 9 && (i + 1) != row && (j + 1) != col)
+                {
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        ((Button) button).setBackground(m_bombBackground);
+                    }
+                }
+                else if (boardArray[i][j] != 0)
+                {
+//                    System.out.print("|" + selections[i][j]);
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        int count = boardArray[i][j];
+
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        setImage(((Button) button), count);
+                    }
+                }
+                else
+                {
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        ((Button) button).setBackground(m_blankBackground);
+                    }
+                }
+            }
+//            System.out.print("|");
+//            System.out.println();
+
+        }
+    }
+
+    /**
+     * A wrapper for calling the Thread class's sleep method within a try catch block.
+     *
+     * @param milliseconds - Amount of seconds to sleep the calling thread.
+     */
+    private void sleep(int milliseconds)
+    {
+        try
+        {
+            Thread.sleep(milliseconds);
+        }
+        catch (Exception e)
+        {
+            m_logger.error(e, e);
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    /**
+     * A Java Swing pop up info box for showing basic pop up information to the user during the game.
+     *
+     * @param infoMessage - The message to be inserted into the pop-up message.
+     * @param titleBar - The partial title of the pop-up box.
+     */
+    public void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
