@@ -63,7 +63,7 @@ public class Controller implements Initializable
     private static final String FLAG_URL = "images/flag.png";
     private static final String BLANK_URL = "images/blank.png";
     private static final String HIT_BOMB_URL = "images/hit-bomb.png";
-    private static final String BLACK_BORDER_STYLE = "-fx-border-color: black"
+    private static final String BLACK_BORDER_STYLE = "-fx-border-color: black";
 
     private Board m_board = null;
     private boolean m_shutdown = false;
