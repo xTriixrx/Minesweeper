@@ -4,128 +4,135 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="basePane" prefHeight="280.0" prefWidth="238.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="basePane" prefHeight="379.0" prefWidth="367.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="bombCount" layoutX="5.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="010" textAlignment="CENTER" wrappingWidth="49.0">
+      <Text fx:id="bombCount" layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="010" textAlignment="CENTER" wrappingWidth="49.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="timeCount" layoutX="182.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="CENTER" wrappingWidth="49.0">
+      <Text fx:id="timeCount" layoutX="304.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="CENTER" wrappingWidth="49.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <GridPane fx:id="boardGrid" layoutX="5.0" layoutY="39.0" prefHeight="237.0" prefWidth="228.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <HBox layoutX="14.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="339.0">
          <children>
-            <Button fx:id="_1_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" />
-            <Button fx:id="_2_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="_3_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="_4_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="3" />
-            <Button fx:id="_5_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="4" />
-            <Button fx:id="_6_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="5" />
-            <Button fx:id="_7_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="6" />
-            <Button fx:id="_8_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="7" />
-            <Button fx:id="_9_1" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.rowIndex="8" />
-            <Button fx:id="_1_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" />
-            <Button fx:id="_1_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" />
-            <Button fx:id="_1_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" />
-            <Button fx:id="_1_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" />
-            <Button fx:id="_1_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" />
-            <Button fx:id="_1_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" />
-            <Button fx:id="_1_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" />
-            <Button fx:id="_1_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" />
-            <Button fx:id="_2_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="_2_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="_2_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button fx:id="_2_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button fx:id="_2_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Button fx:id="_2_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Button fx:id="_2_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <Button fx:id="_2_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <Button fx:id="_3_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="_3_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="_3_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button fx:id="_3_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button fx:id="_3_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Button fx:id="_3_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Button fx:id="_3_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-            <Button fx:id="_3_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Button fx:id="_4_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="_4_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="_4_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button fx:id="_4_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Button fx:id="_4_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Button fx:id="_4_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-            <Button fx:id="_4_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-            <Button fx:id="_4_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-            <Button fx:id="_5_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="_5_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button fx:id="_5_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <Button fx:id="_5_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Button fx:id="_5_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Button fx:id="_5_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <Button fx:id="_5_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-            <Button fx:id="_5_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-            <Button fx:id="_6_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="_7_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button fx:id="_8_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button fx:id="_9_2" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button fx:id="_6_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Button fx:id="_7_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Button fx:id="_8_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <Button fx:id="_9_3" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <Button fx:id="_6_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Button fx:id="_7_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <Button fx:id="_8_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Button fx:id="_9_4" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-            <Button fx:id="_6_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-            <Button fx:id="_7_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-            <Button fx:id="_8_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-            <Button fx:id="_9_5" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-            <Button fx:id="_6_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-            <Button fx:id="_7_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-            <Button fx:id="_8_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-            <Button fx:id="_9_6" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-            <Button fx:id="_6_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-            <Button fx:id="_6_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-            <Button fx:id="_6_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="5" />
-            <Button fx:id="_7_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <Button fx:id="_7_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="6" />
-            <Button fx:id="_7_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-            <Button fx:id="_8_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-            <Button fx:id="_8_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-            <Button fx:id="_8_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="7" />
-            <Button fx:id="_9_7" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-            <Button fx:id="_9_8" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="8" />
-            <Button fx:id="_9_9" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+            <GridPane fx:id="boardGrid" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="_1_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" />
+                  <Button fx:id="_2_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="_3_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="_4_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="3" />
+                  <Button fx:id="_5_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="4" />
+                  <Button fx:id="_6_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.rowIndex="8" />
+                  <Button fx:id="_1_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" />
+                  <Button fx:id="_1_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" />
+                  <Button fx:id="_1_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" />
+                  <Button fx:id="_1_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" />
+                  <Button fx:id="_1_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" />
+                  <Button fx:id="_1_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" />
+                  <Button fx:id="_1_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" />
+                  <Button fx:id="_1_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" />
+                  <Button fx:id="_2_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Button fx:id="_2_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                  <Button fx:id="_3_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <Button fx:id="_3_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Button fx:id="_4_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                  <Button fx:id="_4_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                  <Button fx:id="_5_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <Button fx:id="_5_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                  <Button fx:id="_6_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Button fx:id="_6_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <Button fx:id="_6_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <Button fx:id="_6_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                  <Button fx:id="_6_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                  <Button fx:id="_6_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <Button fx:id="_6_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <Button fx:id="_6_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                  <Button fx:id="_7_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                  <Button fx:id="_7_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                  <Button fx:id="_7_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                  <Button fx:id="_8_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                  <Button fx:id="_8_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                  <Button fx:id="_8_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                  <Button fx:id="_9_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                  <Button fx:id="_9_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                  <Button fx:id="_9_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+               </children>
+            </GridPane>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
          </children>
-      </GridPane>
+      </HBox>
    </children>
 </AnchorPane>

@@ -300,4 +300,8 @@ public class Board
 		System.out.println();
 	}
 
+	public int[][] getSelectionArray()
+	{
+		return m_selects;
+	}
 }
