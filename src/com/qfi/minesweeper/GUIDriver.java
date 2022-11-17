@@ -68,7 +68,7 @@ public class GUIDriver extends Application
         if (root != null)
         {
             // Create a scene based on the loaded layout, grab css resources and set the scene for the primary stage.
-            Scene scene = new Scene(root, 238, 280);
+            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
 
             // Disables maximizing the primary stage

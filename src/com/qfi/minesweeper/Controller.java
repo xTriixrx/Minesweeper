@@ -52,7 +52,7 @@ public class Controller implements Initializable
     private Background m_hitBombBackground = null;
 
     private static final String ONE_URL = "images/1.png";
-    private static final  String TWO_URL = "images/2.png";
+    private static final String TWO_URL = "images/2.png";
     private static final String SIX_URL = "images/6.png";
     private static final String FOUR_URL = "images/4.png";
     private static final String FIVE_URL = "images/5.png";
@@ -63,6 +63,7 @@ public class Controller implements Initializable
     private static final String FLAG_URL = "images/flag.png";
     private static final String BLANK_URL = "images/blank.png";
     private static final String HIT_BOMB_URL = "images/hit-bomb.png";
+    private static final String BLACK_BORDER_STYLE = "-fx-border-color: black"
 
     private Board m_board = null;
     private boolean m_shutdown = false;
@@ -103,6 +104,7 @@ public class Controller implements Initializable
         {
             if (node.getId() != null)
             {
+                node.setStyle(BLACK_BORDER_STYLE);
                 initMouseEvent((Button) node);
             }
         }
@@ -110,11 +112,12 @@ public class Controller implements Initializable
         for (String url : m_imageUrls)
         {
             BackgroundImage backgroundImage = null;
+            BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, true);
 
             try
             {
                 backgroundImage = new BackgroundImage(new Image(Objects.requireNonNull(getClass().getResource(url)).toExternalForm()),
-                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, bgSize);
             }
             catch (Exception e)
             {
@@ -217,6 +220,7 @@ public class Controller implements Initializable
                     {
                         button.setDisable(true);
                         button.setOpacity(1);
+                        button.setStyle("");
                         ((Button) button).setBackground(m_blankBackground);
                     }
                 }
@@ -231,6 +235,7 @@ public class Controller implements Initializable
                     {
                         button.setDisable(true);
                         button.setOpacity(1);
+                        button.setStyle("");
                         ((Button) button).setBackground(m_hitBombBackground);
 //                        ((Button) button).setText("Q");
                     }
@@ -245,6 +250,7 @@ public class Controller implements Initializable
 
                         button.setDisable(true);
                         button.setOpacity(1);
+                        button.setStyle("");
                         setImage(((Button) button), count);
 //                        ((Button) button).setText(Integer.toString(count));
                     }
