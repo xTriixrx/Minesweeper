@@ -235,17 +235,13 @@ public class Board
 				{
 					System.out.print("| ");
 				}
-				else if (m_selects[i][j] == 11)
-				{
-					System.out.print("|-");
-				}
 				else if (m_selects[i][j] != 0)
 				{
 					System.out.print("|" + m_selects[i][j]);
 				}
 				else
 				{
-					System.out.print("|-");
+					System.out.print("| ");
 				}
 			}
 			System.out.print("|");
@@ -278,9 +274,6 @@ public class Board
 			for(int j = 0; j < m_colSize; j++){
 				if(m_board[i][j] == 9){
 					System.out.print("|Q");
-				}
-				else if(m_selects[i][j] == 0){
-					System.out.print("|-");
 				}
 				else if(m_selects[i][j] == 10){
 					System.out.print("| ");
