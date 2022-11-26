@@ -14,7 +14,7 @@ public class Main
 
 		Scanner scan = new Scanner(System.in);
 
-		Board b = new Board(maxSize, maxSize);
+		Board b = new Board(maxSize, maxSize, 10);
 		b.printBoard();
 
 		do

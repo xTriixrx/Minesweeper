@@ -8,16 +8,21 @@ public class Board
 {
 	private int m_rowSize = 0;
 	private int m_colSize = 0;
+	private int m_bombCount = 0;
 	private Random m_random = null;
 	private int[][] m_board = null;// = new int[8][8];//main m_boarday
 	private int[][] m_selects = null;// = new int[8][8];//m_boarday of chosen positions
 	private static final int BOMB_FLAG = 9;
 	private static final String SEPARATOR = "--";
+	private static final int UNSELECTED_BOMB_FLAG = 11;
+	private static final int SELECTED_EMPTY_POSITION = 10;
 
-	public Board(int rowSize, int colSize)
+	public Board(int rowSize, int colSize, int bombCount)
 	{
 		m_rowSize = rowSize;
 		m_colSize = colSize;
+		m_bombCount = bombCount;
+
 		m_random = new Random();
 		m_board = new int[m_rowSize][m_colSize];
 		m_selects = new int[m_rowSize][m_colSize];
@@ -33,18 +38,29 @@ public class Board
 	{
 		int hold, count = 0;
 
-		while(count < 10){
-			for(int i = 0; i < m_rowSize; i++){
-				for(int j = 0; j < m_colSize; j++){
-					hold = m_random.nextInt(25) + 1;
-					if(hold == BOMB_FLAG && count < 10){
-						m_board[i][j] = 9;
-						m_selects[i][j] = 11;
-						count++;
-					}
+//		while(count < m_bombCount)
+//		{
+//			for(int i = 0; i < m_rowSize; i++){
+//				for(int j = 0; j < m_colSize; j++){
+//					hold = m_random.nextInt(25) + 1;
+//					if(hold == BOMB_FLAG && count < 10){
+//						m_board[i][j] = BOMB_FLAG;
+//						m_selects[i][j] = UNSELECTED_BOMB_FLAG;
+//						count++;
+//					}
+//
+//				}
+//			}
+//		}
 
-				}
-			}
+		while (count < m_bombCount)
+		{
+			int randRow = m_random.nextInt(m_rowSize);
+			int randCol = m_random.nextInt(m_colSize);
+
+			m_board[randRow][randCol] = BOMB_FLAG;
+			m_selects[randRow][randCol] = UNSELECTED_BOMB_FLAG;
+			count++;
 		}
 
 	}
@@ -62,7 +78,7 @@ public class Board
 			{
 				count = 0;
 
-				if (m_board[row][col] == 9)
+				if (m_board[row][col] == BOMB_FLAG)
 				{
 					continue;
 				}
@@ -78,7 +94,7 @@ public class Board
 					// Iterate through each possible column neighbor
 					for (int colNum = startCol; colNum <= endCol; colNum++)
 					{
-						if (m_board[rowNum][colNum] == 9)
+						if (m_board[rowNum][colNum] == BOMB_FLAG)
 						{
 							count++;
 						}
@@ -96,7 +112,7 @@ public class Board
 	 */
 	public void submitMove(int row, int col)
 	{
-		if(m_board[row][col] != 9 && m_board[row][col] != 0)
+		if(m_board[row][col] != BOMB_FLAG && m_board[row][col] != 0)
 		{
 			update(row, col);
 		}
@@ -119,7 +135,7 @@ public class Board
 		}
 		else
 		{
-			m_selects[row][col] = 10;
+			m_selects[row][col] = SELECTED_EMPTY_POSITION;
 		}
 	}
 
@@ -131,7 +147,7 @@ public class Board
 	{
 		List<String> spreads = new ArrayList<>();
 
-		if (m_board[row][col] == 0 && m_selects[row][col] != 10)
+		if (m_board[row][col] == 0 && m_selects[row][col] != SELECTED_EMPTY_POSITION)
 		{
 			int startRow = (row - 1 < 0) ? row : row - 1;
 			int startCol = (col - 1 < 0) ? col : col - 1;
@@ -145,7 +161,7 @@ public class Board
 				for (int colNum = startCol; colNum <= endCol; colNum++)
 				{
 					// Only perform actions if current queried position is not a bomb
-					if (m_board[rowNum][colNum] != 9)
+					if (m_board[rowNum][colNum] != BOMB_FLAG)
 					{
 						// If a position is found that is not a spread block, add to selects array
 						if (m_board[rowNum][colNum] != 0)
@@ -158,7 +174,7 @@ public class Board
 						{
 							if (m_board[rowNum][colNum] == 0)
 							{
-								m_selects[rowNum][colNum] = 10;
+								m_selects[rowNum][colNum] = SELECTED_EMPTY_POSITION;
 							}
 						}
 						else
@@ -189,7 +205,7 @@ public class Board
 	 */
 	public boolean lostGame(int row, int col)
 	{
-		return m_board[row][col] == 9;
+		return m_board[row][col] == BOMB_FLAG;
 	}
 	
 	/*
@@ -231,9 +247,17 @@ public class Board
 			System.out.print((i+1 + " "));
 			for (int j = 0; j < m_colSize; j++)
 			{
-				if (m_selects[i][j] == 10)
+				if (m_selects[i][j] == SELECTED_EMPTY_POSITION)
 				{
 					System.out.print("| ");
+				}
+				else if (m_selects[i][j] == UNSELECTED_BOMB_FLAG)
+				{
+					System.out.print("|-");
+				}
+				else if (m_selects[i][j] == BOMB_FLAG)
+				{
+					System.out.print("|Q");
 				}
 				else if (m_selects[i][j] != 0)
 				{
@@ -241,14 +265,13 @@ public class Board
 				}
 				else
 				{
-					System.out.print("| ");
+					System.out.print("|-");
 				}
 			}
 			System.out.print("|");
 			System.out.println();
 
 		}
-
 
 		System.out.print(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
 		System.out.println();
@@ -272,14 +295,11 @@ public class Board
 		for(int i = 0; i < m_rowSize; i++){
 			System.out.print((i+1 + " "));
 			for(int j = 0; j < m_colSize; j++){
-				if(m_board[i][j] == 9){
+				if(m_board[i][j] == BOMB_FLAG){
 					System.out.print("|Q");
 				}
-				else if(m_selects[i][j] == 10){
-					System.out.print("| ");
-				}
 				else if(m_board[i][j] == 0){
-					System.out.print("|-");
+					System.out.print("| ");
 				}
 				else{
 					System.out.print("|" + m_board[i][j]);

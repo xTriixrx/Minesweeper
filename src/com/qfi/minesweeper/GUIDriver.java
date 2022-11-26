@@ -15,14 +15,21 @@ import javafx.application.Application;
  */
 public class GUIDriver extends Application
 {
+    private String m_level = "";
     private Controller m_controller = null;
 
     private static final int EXPERT = 2; // 16x30 w/ 99 mines
     private static final int BEGINNER = 0; // 16x16 w/ 40 mines
     private static final int INTERMEDIATE = 1; // 9x9 w/ 10 mines
+    private static final String EXPERT_LEVEL = "EXPERT";
+    private String LEVEL = System.getProperty("gameLevel");
+    private static final String BEGINNER_LEVEL = "BEGINNER";
     private static final String MINESWEEPER_TITLE = "Minesweeper";
+    private static final String INTERMEDIATE_LEVEL = "INTERMEDIATE";
+    private static final String EXPERT_LAYOUT_PATH = "layout/Expert.fxml";
+    private static final String BEGINNER_LAYOUT_PATH = "layout/Beginner.fxml";
+    private static final String INTERMEDIATE_LAYOUT_PATH = "layout/Intermediate.fxml";
     private static final Logger m_logger = LogManager.getLogger(GUIDriver.class);
-    private static final String MINESWEEPER_LAYOUT_PATH = "layout/Minesweeper.fxml";
 
     /**
      * This method is called immediately after the Application class is loaded and constructed and prior to the
@@ -32,7 +39,29 @@ public class GUIDriver extends Application
     @Override
     public void init()
     {
-        m_controller = new Controller();
+        if (LEVEL == null)
+        {
+            LEVEL = BEGINNER_LEVEL;
+        }
+
+        if (LEVEL.equalsIgnoreCase(EXPERT_LEVEL))
+        {
+            m_level = EXPERT_LEVEL;
+        }
+        else if (LEVEL.equalsIgnoreCase(INTERMEDIATE_LEVEL))
+        {
+            m_level = INTERMEDIATE_LEVEL;
+        }
+        else if (LEVEL.equalsIgnoreCase(BEGINNER_LEVEL))
+        {
+            m_level = BEGINNER_LEVEL;
+        }
+        else
+        {
+            m_level = BEGINNER_LEVEL;
+        }
+
+        m_controller = new Controller(m_level);
         Thread controllerThread = new Thread(m_controller);
         controllerThread.setName("Controller Runnable Thread");
         controllerThread.setDaemon(true);
@@ -57,7 +86,7 @@ public class GUIDriver extends Application
 
         // Set the stage title and set the location of the layout to be loaded
         primaryStage.setTitle(MINESWEEPER_TITLE);
-        loader.setLocation(getClass().getResource(MINESWEEPER_LAYOUT_PATH));
+        loader.setLocation(getClass().getResource(BEGINNER_LAYOUT_PATH));
 
         try
         {

@@ -39,7 +39,7 @@ public class Controller implements Initializable, Runnable
 
     @SuppressWarnings("unused")
     @FXML
-    private Text boardCount;
+    private Text bombCount;
 
     @SuppressWarnings("unused")
     @FXML
@@ -58,6 +58,14 @@ public class Controller implements Initializable, Runnable
     private Background m_eightBackground = null;
     private Background m_hitBombBackground = null;
 
+    private static final int BEGINNER_SIZE = 9;
+    private static final int EXPERT_COL_SIZE = 30;
+    private static final int EXPERT_ROW_SIZE =  16;
+    private static final int INTERMEDIATE_SIZE = 16;
+    private static final int EXPERT_BOMB_COUNT = 99;
+    private static final int BEGINNER_BOMB_COUNT = 10;
+    private static final int INTERMEDIATE_BOMB_COUNT = 40;
+    private static final String EXPERT_LEVEL = "EXPERT";
     private static final String ONE_URL = "images/1.png";
     private static final String TWO_URL = "images/2.png";
     private static final String SIX_URL = "images/6.png";
@@ -66,24 +74,51 @@ public class Controller implements Initializable, Runnable
     private static final String SEVEN_URL = "images/7.png";
     private static final String EIGHT_URL = "images/8.png";
     private static final String THREE_URL = "images/3.png";
+    private static final String BEGINNER_LEVEL = "BEGINNER";
     private static final String BOMB_URL = "images/bomb.png";
     private static final String FLAG_URL = "images/flag.png";
     private static final String BLANK_URL = "images/blank.png";
+    private static final String INTERMEDIATE_LEVEL = "INTERMEDIATE";
     private static final String HIT_BOMB_URL = "images/hit-bomb.png";
     private static final String BLACK_BORDER_STYLE = "-fx-border-color: black";
 
+    private int m_rowSize = 0;
+    private int m_colSize = 0;
+    private int m_bombCount = 0;
     private String m_choice = "";
     private Board m_board = null;
+    private String m_levelType = "";
     private boolean m_shutdown = false;
     private final Object m_choiceSignal = new Object();
     private final Object m_shutdownMutex = new Object();
-    private List<String> m_imageUrls = new ArrayList<>();
+    private final List<String> m_imageUrls = new ArrayList<>();
 
     private static final Logger m_logger = LogManager.getLogger(Controller.class);
 
-    public Controller()
+    public Controller(String levelType)
     {
-        m_board = new Board(9, 9);
+        m_levelType = levelType;
+
+        if (m_levelType.equalsIgnoreCase(BEGINNER_LEVEL))
+        {
+            m_rowSize = BEGINNER_SIZE;
+            m_colSize = BEGINNER_SIZE;
+            m_bombCount = BEGINNER_BOMB_COUNT;
+        }
+        else if (m_levelType.equalsIgnoreCase(INTERMEDIATE_LEVEL))
+        {
+            m_rowSize = INTERMEDIATE_SIZE;
+            m_colSize = INTERMEDIATE_SIZE;
+            m_bombCount = INTERMEDIATE_BOMB_COUNT;
+        }
+        else if (m_levelType.equalsIgnoreCase(EXPERT_LEVEL))
+        {
+            m_rowSize = EXPERT_ROW_SIZE;
+            m_colSize = EXPERT_COL_SIZE;
+            m_bombCount = EXPERT_BOMB_COUNT;
+        }
+
+        m_board = new Board(m_rowSize, m_colSize, m_bombCount);
 
         m_imageUrls.add(ONE_URL);
         m_imageUrls.add(TWO_URL);
@@ -97,6 +132,49 @@ public class Controller implements Initializable, Runnable
         m_imageUrls.add(BOMB_URL);
         m_imageUrls.add(BLANK_URL);
         m_imageUrls.add(HIT_BOMB_URL);
+    }
+
+    /**
+     * Initialization of the JavaFX GUI interface called through the JavaFX runtime.
+     *
+     * @param location - The URL where the FXML layout is being referenced.
+     * @param resources - The resources bundle if any were provided.
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        // Initialize each button to be clickable
+        for (Node node : boardGrid.getChildren())
+        {
+            if (node.getId() != null)
+            {
+                node.setStyle(BLACK_BORDER_STYLE);
+                initMouseEvent((Button) node);
+            }
+        }
+
+        for (String url : m_imageUrls)
+        {
+            BackgroundImage backgroundImage = null;
+            BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, true);
+
+            try
+            {
+                backgroundImage = new BackgroundImage(new Image(Objects.requireNonNull(getClass().getResource(url)).toExternalForm()),
+                        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, bgSize);
+            }
+            catch (Exception e)
+            {
+                m_logger.error(e, e);
+            }
+
+            if (backgroundImage != null)
+            {
+                setBackgroundImage(backgroundImage, url);
+            }
+        }
+
+        bombCount.setText("0" + m_bombCount);
     }
 
     @Override
@@ -132,10 +210,10 @@ public class Controller implements Initializable, Runnable
         m_board.submitMove(row - 1, col - 1);
         int[][] selections = m_board.getSelectionArray();
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < m_rowSize; i++)
         {
 //            System.out.print((i+1 + " "));
-            for (int j = 0; j < 9; j++)
+            for (int j = 0; j < m_colSize; j++)
             {
                 if (selections[i][j] == 10)
                 {
@@ -219,47 +297,6 @@ public class Controller implements Initializable, Runnable
             displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), choice);
             m_board.printEndBoard();
 //            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
-        }
-    }
-
-    /**
-     * Initialization of the JavaFX GUI interface called through the JavaFX runtime.
-     *
-     * @param location - The URL where the FXML layout is being referenced.
-     * @param resources - The resources bundle if any were provided.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        // Initialize each button to be clickable
-        for (Node node : boardGrid.getChildren())
-        {
-            if (node.getId() != null)
-            {
-                node.setStyle(BLACK_BORDER_STYLE);
-                initMouseEvent((Button) node);
-            }
-        }
-
-        for (String url : m_imageUrls)
-        {
-            BackgroundImage backgroundImage = null;
-            BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, true);
-
-            try
-            {
-                backgroundImage = new BackgroundImage(new Image(Objects.requireNonNull(getClass().getResource(url)).toExternalForm()),
-                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, bgSize);
-            }
-            catch (Exception e)
-            {
-                m_logger.error(e, e);
-            }
-
-            if (backgroundImage != null)
-            {
-                setBackgroundImage(backgroundImage, url);
-            }
         }
     }
 
@@ -377,10 +414,10 @@ public class Controller implements Initializable, Runnable
         int row = Integer.parseInt(rowCol[0]);
         int col = Integer.parseInt(rowCol[1]);
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < m_rowSize; i++)
         {
 //            System.out.print((i+1 + " "));
-            for (int j = 0; j < 9; j++)
+            for (int j = 0; j < m_colSize; j++)
             {
                 if (boardArray[i][j] == 0 || boardArray[i][j] == 10 || selectionsArray[i][j] == 10)
                 {
