@@ -33,6 +33,10 @@ public class GUIDriver extends Application
     public void init()
     {
         m_controller = new Controller();
+        Thread controllerThread = new Thread(m_controller);
+        controllerThread.setName("Controller Runnable Thread");
+        controllerThread.setDaemon(true);
+        controllerThread.start();
     }
 
     /**

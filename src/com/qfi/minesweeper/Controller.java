@@ -31,7 +31,7 @@ import javax.swing.*;
  * @author Vincent.Nigro
  * @version 1.0.0
  */
-public class Controller implements Initializable
+public class Controller implements Initializable, Runnable
 {
     @SuppressWarnings("unused")
     @FXML
@@ -72,8 +72,10 @@ public class Controller implements Initializable
     private static final String HIT_BOMB_URL = "images/hit-bomb.png";
     private static final String BLACK_BORDER_STYLE = "-fx-border-color: black";
 
+    private String m_choice = "";
     private Board m_board = null;
     private boolean m_shutdown = false;
+    private final Object m_choiceSignal = new Object();
     private final Object m_shutdownMutex = new Object();
     private List<String> m_imageUrls = new ArrayList<>();
 
@@ -95,6 +97,129 @@ public class Controller implements Initializable
         m_imageUrls.add(BOMB_URL);
         m_imageUrls.add(BLANK_URL);
         m_imageUrls.add(HIT_BOMB_URL);
+    }
+
+    @Override
+    public void run()
+    {
+        while (!m_shutdown)
+        {
+            // wait for choice
+            synchronized (m_choiceSignal)
+            {
+                try
+                {
+                    m_choiceSignal.wait();
+                }
+                catch (Exception e)
+                {
+                    m_logger.error(e, e);
+                    Thread.currentThread().interrupt();
+                }
+            }
+
+            // Perform choice update
+            update(m_choice);
+        }
+    }
+
+    private void update(String choice)
+    {
+        String[] rowCol = choice.split("_");
+        int row = Integer.parseInt(rowCol[0]);
+        int col = Integer.parseInt(rowCol[1]);
+
+        m_board.submitMove(row - 1, col - 1);
+        int[][] selections = m_board.getSelectionArray();
+
+        for (int i = 0; i < 9; i++)
+        {
+//            System.out.print((i+1 + " "));
+            for (int j = 0; j < 9; j++)
+            {
+                if (selections[i][j] == 10)
+                {
+//                    System.out.print("| ");
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        ((Button) button).setBackground(m_blankBackground);
+                    }
+                }
+                else if (selections[i][j] == 11)
+                {
+
+                }
+                else if (selections[i][j] == 9)
+                {
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        ((Button) button).setBackground(m_hitBombBackground);
+//                        ((Button) button).setText("Q");
+                    }
+                }
+                else if (selections[i][j] != 0)
+                {
+//                    System.out.print("|" + selections[i][j]);
+                    Node button = getNode(i + 1, j + 1);
+                    if (button != null)
+                    {
+                        int count = selections[i][j];
+
+                        button.setDisable(true);
+                        button.setOpacity(1);
+                        button.setStyle("");
+                        setImage(((Button) button), count);
+//                        ((Button) button).setText(Integer.toString(count));
+                    }
+                }
+//                else
+//                {
+//                    System.out.print("|-");
+//                }
+            }
+//            System.out.print("|");
+//            System.out.println();
+
+        }
+
+        m_board.printBoard();
+
+        if (m_board.lostGame(row - 1, col - 1))
+        {
+//            DecimalFormat df = new DecimalFormat("###.##");
+//            EndTime = System.nanoTime();
+//            Gameplay = false;
+//            double seconds = (EndTime-StartTime) / 1000000000.0;
+//            int minutes = (int) (seconds / 60);
+//            seconds = seconds - (minutes * 60);
+//            b.printEndBoard();
+//            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
+            infoBox("Sorry, you lost.", "Lost");
+            displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), choice);
+            m_board.printEndBoard();
+//            System.out.println("Sorry, you lost");
+        }
+        if (m_board.wonGame())
+        {
+//            DecimalFormat df = new DecimalFormat("###.##");
+//            EndTime = System.nanoTime();
+//            Gameplay = false;
+//            double seconds = (EndTime-StartTime) / 1000000000.0;
+//            int minutes = (int) (seconds / 60);
+//            seconds = seconds - (minutes * 60);
+            infoBox("Congratulations, you won!", "Won");
+            displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), choice);
+            m_board.printEndBoard();
+//            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
+        }
     }
 
     /**
@@ -205,98 +330,11 @@ public class Controller implements Initializable
     {
         String position = ((Node) event.getTarget()).getId().substring(1);
         m_logger.debug("Button: " + position);
-        String[] rowCol = position.split("_");
-        int row = Integer.parseInt(rowCol[0]);
-        int col = Integer.parseInt(rowCol[1]);
+        m_choice = position;
 
-        m_board.submitMove(row - 1, col - 1);
-        int[][] selections = m_board.getSelectionArray();
-
-        for (int i = 0; i < 9; i++)
+        synchronized (m_choiceSignal)
         {
-//            System.out.print((i+1 + " "));
-            for (int j = 0; j < 9; j++)
-            {
-                if (selections[i][j] == 10)
-                {
-//                    System.out.print("| ");
-                    Node button = getNode(i + 1, j + 1);
-                    if (button != null)
-                    {
-                        button.setDisable(true);
-                        button.setOpacity(1);
-                        button.setStyle("");
-                        ((Button) button).setBackground(m_blankBackground);
-                    }
-                }
-                else if (selections[i][j] == 11)
-                {
-
-                }
-                else if (selections[i][j] == 9)
-                {
-                    Node button = getNode(i + 1, j + 1);
-                    if (button != null)
-                    {
-                        button.setDisable(true);
-                        button.setOpacity(1);
-                        button.setStyle("");
-                        ((Button) button).setBackground(m_hitBombBackground);
-//                        ((Button) button).setText("Q");
-                    }
-                }
-                else if (selections[i][j] != 0)
-                {
-//                    System.out.print("|" + selections[i][j]);
-                    Node button = getNode(i + 1, j + 1);
-                    if (button != null)
-                    {
-                        int count = selections[i][j];
-
-                        button.setDisable(true);
-                        button.setOpacity(1);
-                        button.setStyle("");
-                        setImage(((Button) button), count);
-//                        ((Button) button).setText(Integer.toString(count));
-                    }
-                }
-//                else
-//                {
-//                    System.out.print("|-");
-//                }
-            }
-//            System.out.print("|");
-//            System.out.println();
-
-        }
-
-        m_board.printBoard();
-
-        if (m_board.lostGame(row - 1, col - 1))
-        {
-//            DecimalFormat df = new DecimalFormat("###.##");
-//            EndTime = System.nanoTime();
-//            Gameplay = false;
-//            double seconds = (EndTime-StartTime) / 1000000000.0;
-//            int minutes = (int) (seconds / 60);
-//            seconds = seconds - (minutes * 60);
-//            b.printEndBoard();
-//            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
-            infoBox("Sorry, you lost.", "Lost");
-            displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), position);
-//            System.out.println("Sorry, you lost");
-        }
-        if (m_board.wonGame())
-        {
-//            DecimalFormat df = new DecimalFormat("###.##");
-//            EndTime = System.nanoTime();
-//            Gameplay = false;
-//            double seconds = (EndTime-StartTime) / 1000000000.0;
-//            int minutes = (int) (seconds / 60);
-//            seconds = seconds - (minutes * 60);
-            infoBox("Congratulations, you won!", "Won");
-            displayEndGame(m_board.getBoardArray(), m_board.getSelectionArray(), position);
-//            System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
+            m_choiceSignal.notifyAll();
         }
     };
 
@@ -356,7 +394,7 @@ public class Controller implements Initializable
                         ((Button) button).setBackground(m_blankBackground);
                     }
                 }
-                else if (boardArray[i][j] == 9 && (i + 1) != row && (j + 1) != col)
+                else if (boardArray[i][j] == 9)
                 {
                     Node button = getNode(i + 1, j + 1);
                     if (button != null)
@@ -397,6 +435,12 @@ public class Controller implements Initializable
 //            System.out.println();
 
         }
+
+        Node button = getNode(row, col);
+        button.setDisable(true);
+        button.setOpacity(1);
+        button.setStyle("");
+        ((Button) button).setBackground(m_hitBombBackground);
     }
 
     /**
