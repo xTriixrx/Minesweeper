@@ -16,6 +16,7 @@ import javafx.application.Application;
 public class GUIDriver extends Application
 {
     private String m_level = "";
+    private String m_layout = "";
     private Controller m_controller = null;
 
     private static final int EXPERT = 2; // 16x30 w/ 99 mines
@@ -47,18 +48,22 @@ public class GUIDriver extends Application
         if (LEVEL.equalsIgnoreCase(EXPERT_LEVEL))
         {
             m_level = EXPERT_LEVEL;
+            m_layout = EXPERT_LAYOUT_PATH;
         }
         else if (LEVEL.equalsIgnoreCase(INTERMEDIATE_LEVEL))
         {
             m_level = INTERMEDIATE_LEVEL;
+            m_layout = INTERMEDIATE_LAYOUT_PATH;
         }
         else if (LEVEL.equalsIgnoreCase(BEGINNER_LEVEL))
         {
             m_level = BEGINNER_LEVEL;
+            m_layout = BEGINNER_LAYOUT_PATH;
         }
         else
         {
             m_level = BEGINNER_LEVEL;
+            m_layout = BEGINNER_LAYOUT_PATH;
         }
 
         m_controller = new Controller(m_level);
@@ -86,7 +91,7 @@ public class GUIDriver extends Application
 
         // Set the stage title and set the location of the layout to be loaded
         primaryStage.setTitle(MINESWEEPER_TITLE);
-        loader.setLocation(getClass().getResource(BEGINNER_LAYOUT_PATH));
+        loader.setLocation(getClass().getResource(m_layout));
 
         try
         {
