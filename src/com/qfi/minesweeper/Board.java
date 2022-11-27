@@ -58,9 +58,12 @@ public class Board
 			int randRow = m_random.nextInt(m_rowSize);
 			int randCol = m_random.nextInt(m_colSize);
 
-			m_board[randRow][randCol] = BOMB_FLAG;
-			m_selects[randRow][randCol] = UNSELECTED_BOMB_FLAG;
-			count++;
+			if (m_board[randRow][randCol] != BOMB_FLAG)
+			{
+				m_board[randRow][randCol] = BOMB_FLAG;
+				m_selects[randRow][randCol] = UNSELECTED_BOMB_FLAG;
+				count++;
+			}
 		}
 
 	}
