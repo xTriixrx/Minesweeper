@@ -28,7 +28,7 @@ public class GUIDriver extends Application
     private static final String MINESWEEPER_TITLE = "Minesweeper";
     private static final String INTERMEDIATE_LEVEL = "INTERMEDIATE";
     private static final String EXPERT_LAYOUT_PATH = "layout/Expert.fxml";
-    private static final String BEGINNER_LAYOUT_PATH = "layout/Beginner.fxml";
+    private static final String BEGINNER_LAYOUT_PATH = "layout/Beginne.fxml";
     private static final String INTERMEDIATE_LAYOUT_PATH = "layout/Intermediate.fxml";
     private static final Logger m_logger = LogManager.getLogger(GUIDriver.class);
 

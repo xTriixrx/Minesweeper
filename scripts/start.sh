@@ -14,9 +14,9 @@ fi
 if [ $# -eq 1 ]; then
     if [[ ${1^^} =~ $BEGINNER_LEVEL ]]; then
         LEVEL=$BEGINNER_LEVEL;
-    elif [[ ${1^^} == $INTERMEDIATE_LEVEL ]]; then
+    elif [[ ${1^^} =~ $INTERMEDIATE_LEVEL ]]; then
         LEVEL=$INTERMEDIATE_LEVEL;
-    elif [[ ${1^^} == $EXPERT_LEVEL ]]; then
+    elif [[ ${1^^} =~ $EXPERT_LEVEL ]]; then
         LEVEL=$EXPERT_LEVEL;
     else
         LEVEL=$BEGINNER_LEVEL;

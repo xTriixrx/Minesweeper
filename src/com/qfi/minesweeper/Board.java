@@ -36,28 +36,15 @@ public class Board
 	 */
 	private void placeBombs()
 	{
-		int hold, count = 0;
+		int count = 0;
 
-//		while(count < m_bombCount)
-//		{
-//			for(int i = 0; i < m_rowSize; i++){
-//				for(int j = 0; j < m_colSize; j++){
-//					hold = m_random.nextInt(25) + 1;
-//					if(hold == BOMB_FLAG && count < 10){
-//						m_board[i][j] = BOMB_FLAG;
-//						m_selects[i][j] = UNSELECTED_BOMB_FLAG;
-//						count++;
-//					}
-//
-//				}
-//			}
-//		}
-
+		// While placed bombs is less than expected bomb count for this board
 		while (count < m_bombCount)
 		{
 			int randRow = m_random.nextInt(m_rowSize);
 			int randCol = m_random.nextInt(m_colSize);
 
+			// If random row/col position hasn't already placed a bomb, place the bomb
 			if (m_board[randRow][randCol] != BOMB_FLAG)
 			{
 				m_board[randRow][randCol] = BOMB_FLAG;
@@ -202,33 +189,6 @@ public class Board
 			}
 		}
 	}
-	
-	/*
-	 * If game is lost, outputs boolean in main class  
-	 */
-	public boolean lostGame(int row, int col)
-	{
-		return m_board[row][col] == BOMB_FLAG;
-	}
-	
-	/*
-	 * If is true when only bombs are left, outputs boolean in main class
-	 */
-	public boolean wonGame()
-	{
-		for (int i = 0; i < m_rowSize; i++)
-		{
-			for (int j = 0; j < m_colSize; j++)
-			{
-				if (m_selects[i][j] == 0)
-				{
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
 
 	/*
 	 * This method was made to check bomb counts on cells and used to test game
@@ -314,6 +274,33 @@ public class Board
 
 		System.out.print(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
 		System.out.println();
+	}
+
+	/*
+	 * If game is lost, outputs boolean in main class
+	 */
+	public boolean lostGame(int row, int col)
+	{
+		return m_board[row][col] == BOMB_FLAG;
+	}
+
+	/*
+	 * If is true when only bombs are left, outputs boolean in main class
+	 */
+	public boolean wonGame()
+	{
+		for (int i = 0; i < m_rowSize; i++)
+		{
+			for (int j = 0; j < m_colSize; j++)
+			{
+				if (m_selects[i][j] == 0)
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	public int[][] getBoardArray()
