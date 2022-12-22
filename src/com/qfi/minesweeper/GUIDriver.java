@@ -9,6 +9,8 @@ import org.apache.log4j.LogManager;
 import javafx.application.Application;
 
 /**
+ * GUIDriver drives the JavaFx Minesweeper application by being the JavaFx application entry point and
+ * instantiating the associated controller & it's main thread.
  *
  * @author Vincent.Nigro
  * @version 1.0.0
@@ -18,9 +20,6 @@ public class GUIDriver extends Application
     private String m_layout = "";
     private Controller m_controller = null;
 
-    private static final int EXPERT = 2; // 16x30 w/ 99 mines
-    private static final int BEGINNER = 0; // 16x16 w/ 40 mines
-    private static final int INTERMEDIATE = 1; // 9x9 w/ 10 mines
     private static final String EXPERT_LEVEL = "EXPERT";
     private String LEVEL = System.getProperty("gameLevel");
     private static final String BEGINNER_LEVEL = "BEGINNER";

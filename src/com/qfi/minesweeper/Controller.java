@@ -71,7 +71,7 @@ public class Controller implements Initializable, Runnable
     private static final int INTERMEDIATE_BOMB_COUNT = 40;
 
     private static final String STRING_ZERO = "0";
-    private static final String EXPERT_LEVEL = "EXPERT";
+    private static final String EXPERT_LEVEL = "EXPERT"; // 16x30 w/ 99 mines
     private static final String ONE_URL = "images/1.png";
     private static final String TWO_URL = "images/2.png";
     private static final String SIX_URL = "images/6.png";
@@ -80,11 +80,11 @@ public class Controller implements Initializable, Runnable
     private static final String SEVEN_URL = "images/7.png";
     private static final String EIGHT_URL = "images/8.png";
     private static final String THREE_URL = "images/3.png";
-    private static final String BEGINNER_LEVEL = "BEGINNER";
+    private static final String BEGINNER_LEVEL = "BEGINNER"; // 9x9 w/ 10 mines
     private static final String BOMB_URL = "images/bomb.png";
     private static final String FLAG_URL = "images/flag.png";
     private static final String BLANK_URL = "images/blank.png";
-    private static final String INTERMEDIATE_LEVEL = "INTERMEDIATE";
+    private static final String INTERMEDIATE_LEVEL = "INTERMEDIATE"; // 16x16 w/ 40 mines
     private static final String HIT_BOMB_URL = "images/hit-bomb.png";
     private static final String BLACK_BORDER_STYLE = "-fx-border-color: black";
     private static final String DEFAULT_BACKGROUND_COLOR = "-fx-background-color: #e2e2e2";
