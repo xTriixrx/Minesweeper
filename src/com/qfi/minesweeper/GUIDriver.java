@@ -15,7 +15,6 @@ import javafx.application.Application;
  */
 public class GUIDriver extends Application
 {
-    private String m_level = "";
     private String m_layout = "";
     private Controller m_controller = null;
 
@@ -40,6 +39,8 @@ public class GUIDriver extends Application
     @Override
     public void init()
     {
+        String level;
+
         if (LEVEL == null)
         {
             LEVEL = BEGINNER_LEVEL;
@@ -47,26 +48,21 @@ public class GUIDriver extends Application
 
         if (LEVEL.equalsIgnoreCase(EXPERT_LEVEL))
         {
-            m_level = EXPERT_LEVEL;
+            level = EXPERT_LEVEL;
             m_layout = EXPERT_LAYOUT_PATH;
         }
         else if (LEVEL.equalsIgnoreCase(INTERMEDIATE_LEVEL))
         {
-            m_level = INTERMEDIATE_LEVEL;
+            level = INTERMEDIATE_LEVEL;
             m_layout = INTERMEDIATE_LAYOUT_PATH;
-        }
-        else if (LEVEL.equalsIgnoreCase(BEGINNER_LEVEL))
-        {
-            m_level = BEGINNER_LEVEL;
-            m_layout = BEGINNER_LAYOUT_PATH;
         }
         else
         {
-            m_level = BEGINNER_LEVEL;
+            level = BEGINNER_LEVEL;
             m_layout = BEGINNER_LAYOUT_PATH;
         }
 
-        m_controller = new Controller(m_level);
+        m_controller = new Controller(level);
         Thread controllerThread = new Thread(m_controller);
         controllerThread.setName("Controller Runnable Thread");
         controllerThread.setDaemon(true);
