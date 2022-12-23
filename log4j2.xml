@@ -11,7 +11,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.qfi.minesweeper" additivity="false" level="DEBUG">
+        <Logger name="com.qfi.minesweeper" additivity="false" level="ALL">
             <AppenderRef ref="Minesweeper" />
         </Logger>
         <Root level="ALL" additivity="false">

@@ -3,18 +3,26 @@ package com.qfi.minesweeper;
 import java.util.Scanner;
 import java.text.DecimalFormat;
 
+/**
+ *
+ */
 public class Main
 {
+	private static final int BOMB_COUNT = 10;
+
 	public static void main(String[] args)
 	{
 		int maxSize = 9;
 		int row = 0, col = 0;
-		boolean rowCheck = true, colCheck = true, Gameplay = true, firsttime = true;
+		boolean rowCheck = true;
+		boolean colCheck = true;
+		boolean Gameplay = true;
+		boolean firsttime = true;
 		long StartTime = 0, EndTime = 0;
 
 		Scanner scan = new Scanner(System.in);
 
-		Board b = new Board(maxSize, maxSize, 10);
+		Board b = new Board(maxSize, maxSize, BOMB_COUNT);
 		b.printBoard();
 
 		do
