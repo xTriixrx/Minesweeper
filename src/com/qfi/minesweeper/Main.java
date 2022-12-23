@@ -8,79 +8,45 @@ import java.text.DecimalFormat;
  */
 public class Main
 {
+	private static final int MAX_SIZE = 9;
 	private static final int BOMB_COUNT = 10;
 
 	public static void main(String[] args)
 	{
-		int maxSize = 9;
-		int row = 0, col = 0;
-		boolean rowCheck = true;
-		boolean colCheck = true;
-		boolean Gameplay = true;
+		int row;
+		int col;
+		boolean gameplay = true;
 		boolean firsttime = true;
-		long StartTime = 0, EndTime = 0;
+		long startTime = 0, endTime = 0;
 
 		Scanner scan = new Scanner(System.in);
 
-		Board b = new Board(maxSize, maxSize, BOMB_COUNT);
+		Board b = new Board(MAX_SIZE, MAX_SIZE, BOMB_COUNT);
 		b.printBoard();
 
 		do
 		{
 			System.out.print("Input row: ");
-			while(rowCheck){
-				try{
-					row = scan.nextInt();
-					row = row - 1;
-					if(row <= -1 || row > (maxSize - 1)){
-						rowCheck = true;
-						System.out.print("This value is not in the range of the game try again");
-						System.out.println();
-					}
-					else{
-					rowCheck = false;
-					}
-				}catch(Exception e){
-					System.out.print("This value is not in the range of the game try again");
-				}
-			}
+			row = selectionChecker(scan);
 
 			System.out.print("Input column: ");
-			while(colCheck)
+			col = selectionChecker(scan);
+
+			if (firsttime)
 			{
-				try
-				{
-					col = scan.nextInt();
-					col = col - 1;
-					if(col <= -1 || col > (maxSize - 1)){
-						colCheck = true;
-						System.out.print("This value is not in the range of the game try again");
-						System.out.println();
-					}
-					else{
-					colCheck = false;
-					}
-				}catch(Exception e){
-					System.out.print("This value is not in the range of the game try again");
-				}
-			}
-			if (firsttime){
-			StartTime = System.nanoTime();
-			firsttime = false;
+				startTime = System.nanoTime();
+				firsttime = false;
 			}
 
 			b.submitMove(row, col);
 			b.printBoard();
 
-			rowCheck = true;
-			colCheck = true;
-
 			if (b.lostGame(row, col))
 			{
 				DecimalFormat df = new DecimalFormat("###.##");
-				EndTime = System.nanoTime();
-				Gameplay = false;
-				double seconds = (EndTime-StartTime) / 1000000000.0;
+				endTime = System.nanoTime();
+				gameplay = false;
+				double seconds = (endTime-startTime) / 1000000000.0;
 				int minutes = (int) (seconds / 60);
 				seconds = seconds - (minutes * 60);
 				b.printEndBoard();
@@ -90,15 +56,52 @@ public class Main
 			if (b.wonGame())
 			{
 				DecimalFormat df = new DecimalFormat("###.##");
-				EndTime = System.nanoTime();
-				Gameplay = false;
-				double seconds = (EndTime-StartTime) / 1000000000.0;
+				endTime = System.nanoTime();
+				gameplay = false;
+				double seconds = (endTime-startTime) / 1000000000.0;
 				int minutes = (int) (seconds / 60);
 				seconds = seconds - (minutes * 60);
 				System.out.println("Congratulations, you won!");
 				System.out.println("Your time was: " + minutes + " Minute(s), " +  df.format(seconds) + " second(s).");
 			}
-		}while(Gameplay);
+		} while(gameplay);
 	}
 
+	private static int selectionChecker(Scanner scan)
+	{
+		int value = 0;
+		boolean check = true;
+
+		while (check)
+		{
+			value = getSelection(scan);
+			value--;
+
+			if (value <= -1 || value > (MAX_SIZE - 1))
+			{
+				System.out.println("This value is not in the range of the game try again");
+				continue;
+			}
+
+			check = false;
+		}
+
+		return value;
+	}
+
+	private static int getSelection(Scanner scan)
+	{
+		int value = -99;
+
+		try
+		{
+			value = scan.nextInt();
+		}
+		catch (Exception e)
+		{
+			System.out.println("This value is not in range, please try again.");
+		}
+
+		return value;
+	}
 }
