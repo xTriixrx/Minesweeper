@@ -23,10 +23,15 @@ public class Board
 	private final int[][] m_board; // main board
 	private final int[][] m_selects; // board of chosen positions
 	private static final int BOMB_FLAG = 9;
-	private static final String SEPARATOR = "--";
+	private static final String SEPARATOR = "-";
 	private static final String SPACE_REGEX = "\\s+";
+	private static final int SEPARATOR_PER_COLUMN = 3;
 	private static final int UNSELECTED_BOMB_FLAG = 11;
 	private static final int SELECTED_EMPTY_POSITION = 10;
+	private static final String BOMB_POSITION_TEXT = "|Q";
+	private static final String POSITION_BORDER_TEXT = "|";
+	private static final String NON_SELECTED_POSITION_TEXT = "|-";
+	private static final String EMPTY_SELECTED_POSITION_TEXT = "| ";
 	private static final Logger m_logger = LogManager.getLogger(Board.class);
 
 	/**
@@ -174,10 +179,12 @@ public class Board
 		if (m_board[row][col] != 0)
 		{
 			m_selects[row][col] = m_board[row][col];
+			m_logger.trace("Setting selects position (" + row + "," + col + ") to: " + m_board[row][col]);
 		}
 		else // If empty, enter a selected empty position representation flag into selections
 		{
 			m_selects[row][col] = SELECTED_EMPTY_POSITION;
+			m_logger.trace("Setting selects position (" + row + "," + col + ") to: " + SELECTED_EMPTY_POSITION);
 		}
 	}
 
@@ -195,6 +202,7 @@ public class Board
 		{
 			// Get list of additional spreads
 			List<String> spreads = spreadProtocol(row, col);
+			m_logger.debug("Position (" + row + "," + col + ") contains spread positions: " + spreads);
 
 			// Iterate over each spread position found & continue fanning out
 			for (String pos : spreads)
@@ -261,6 +269,8 @@ public class Board
 			if (m_board[neighborRow][neighborCol] != 0)
 			{
 				m_selects[neighborRow][neighborCol] = m_board[neighborRow][neighborCol];
+				m_logger.trace("Setting selects position (" + neighborRow + "," + neighborCol + ") to: " +
+					m_board[neighborRow][neighborCol]);
 			}
 
 			// If the current spread block is found, tag in select array
@@ -269,6 +279,8 @@ public class Board
 				if (m_board[neighborRow][neighborCol] == 0)
 				{
 					m_selects[neighborRow][neighborCol] = SELECTED_EMPTY_POSITION;
+					m_logger.trace("Setting selects position (" + neighborRow + "," + neighborCol + ") to: " +
+							SELECTED_EMPTY_POSITION);
 				}
 			}
 			else
@@ -277,6 +289,7 @@ public class Board
 				if (m_board[neighborRow][neighborCol] == 0)
 				{
 					spread = neighborRow + " " + neighborCol;
+					m_logger.trace("Adding position (" + neighborRow + "," + neighborCol + ") to spread list.");
 				}
 			}
 		}
@@ -284,90 +297,84 @@ public class Board
 		return spread;
 	}
 
-	/*
-	 * This method was made to check bomb counts on cells and used to test game
+	/**
+	 * A game play by play console printout of the game board, logging must be set to TRACE in order to receive logging.
 	 */
 	public void printBoard()
 	{
-		System.out.print("  ");
+		StringBuilder sb = new StringBuilder();
 
-		for(int i = 0; i < m_colSize; i++){
-			System.out.print("|" + (i+1) );
-
-		}
-		System.out.print("|");
-		System.out.println();
-		System.out.println(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
+		m_logger.trace(SEPARATOR.repeat((m_colSize * SEPARATOR_PER_COLUMN) - (m_colSize - 1)));
 
 		for (int i = 0; i < m_rowSize; i++)
 		{
-			System.out.print((i+1 + " "));
 			for (int j = 0; j < m_colSize; j++)
 			{
 				if (m_selects[i][j] == SELECTED_EMPTY_POSITION)
 				{
-					System.out.print("| ");
+					sb.append(EMPTY_SELECTED_POSITION_TEXT);
 				}
 				else if (m_selects[i][j] == UNSELECTED_BOMB_FLAG)
 				{
-					System.out.print("|-");
+					sb.append(NON_SELECTED_POSITION_TEXT);
 				}
 				else if (m_selects[i][j] == BOMB_FLAG)
 				{
-					System.out.print("|Q");
+					sb.append(BOMB_POSITION_TEXT);
 				}
 				else if (m_selects[i][j] != 0)
 				{
-					System.out.print("|" + m_selects[i][j]);
+					sb.append(POSITION_BORDER_TEXT);
+					sb.append(m_selects[i][j]);
 				}
 				else
 				{
-					System.out.print("|-");
+					sb.append(NON_SELECTED_POSITION_TEXT);
 				}
 			}
-			System.out.print("|");
-			System.out.println();
 
+			sb.append(POSITION_BORDER_TEXT);
+			m_logger.trace(sb.toString());
+			sb.setLength(0);
 		}
 
-		System.out.print(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
-		System.out.println();
+		m_logger.trace(SEPARATOR.repeat((m_colSize * SEPARATOR_PER_COLUMN) - (m_colSize - 1)));
 	}
 
 	/**
-	 *
+	 * A console print out of the end game board, logging must be set to TRACE in order to receive logging.
 	 */
 	public void printEndBoard()
 	{
-		System.out.print("  ");
+		StringBuilder sb = new StringBuilder();
 
-		for(int i = 0; i < m_colSize; i++){
-			System.out.print("|" + (i+1) );
+		m_logger.trace(SEPARATOR.repeat((m_colSize * SEPARATOR_PER_COLUMN) - (m_colSize - 1)));
 
-		}
-		System.out.print("|");
-		System.out.println();
-		System.out.println(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
-
-		for(int i = 0; i < m_rowSize; i++){
-			System.out.print((i+1 + " "));
-			for(int j = 0; j < m_colSize; j++){
-				if(m_board[i][j] == BOMB_FLAG){
-					System.out.print("|Q");
+		for (int i = 0; i < m_rowSize; i++)
+		{
+			for (int j = 0; j < m_colSize; j++)
+			{
+				if (m_board[i][j] == BOMB_FLAG)
+				{
+					sb.append(BOMB_POSITION_TEXT);
 				}
-				else if(m_board[i][j] == 0){
-					System.out.print("| ");
+				else if (m_board[i][j] == 0)
+				{
+					sb.append(EMPTY_SELECTED_POSITION_TEXT);
 				}
-				else{
-					System.out.print("|" + m_board[i][j]);
+				else
+				{
+					sb.append(POSITION_BORDER_TEXT);
+					sb.append(m_board[i][j]);
 				}
 			}
-			System.out.print("|");
-			System.out.println();
+
+			sb.append(POSITION_BORDER_TEXT);
+			m_logger.trace(sb.toString());
+			sb.setLength(0);
 		}
 
-		System.out.print(SEPARATOR.repeat(m_colSize + (m_colSize / 4)));
-		System.out.println();
+		m_logger.trace(SEPARATOR.repeat((m_colSize * SEPARATOR_PER_COLUMN) - (m_colSize - 1)));
 	}
 
 	/**
